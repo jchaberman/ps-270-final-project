@@ -16,3 +16,14 @@ I am interested in exploring data related to gerrymandering and voting rights.
 Does increasing the availability of ballot drop boxes increase voter participation in elections? If ballot drop boxes are more available for voters, then there will by higher voter turnout. The variable of interest is in state laws regarding ballot drop boxes. States can either require ballot drop boxes, allow them but not require them, have no law on drop boxes, restrict the use of ballot drop boxes, or ban their use altogether. I will assign each of these options a number 1-5, to measure the variable numerically. The outcome variable of interest is voter turnout. It is measured by the percentage of eligible voters in the state that voted in the 2024 election. If states that require ballot drop boxes have higher voter turnout, then my hypothesis will be supported. However, if states with more restrictive use on ballot drop boxes have higher voter turnout, or there is no correlation between ballot drop boxes and voter turnout, then my hypothesis will be disproved. 
 
 
+```{r}
+library(tidyverse)
+```
+
+```{r}
+data <- read.csv("Final Project Data - Sheet1.csv")
+data
+```
+
+
+
