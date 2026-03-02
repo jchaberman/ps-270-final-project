@@ -1555,59 +1555,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"Final Project Data - Sheet1.csv"</span><span class='op'>)</span></span>
-<span><span class='va'>data</span></span></code></pre>
+<span><span class='fu'><a href='https://pillar.r-lib.org/reference/glimpse.html'>glimpse</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code>   State    Ballot_Box_Law Voter_Participation_2024
-1     AL            No Law                   58.70%
-2     AK            No Law                   62.10%
-3     AZ Broadly Available                   61.70%
-4     AR            Banned                   52.80%
-5     CA          Required                   64.70%
-6     CO          Required                   70.10%
-7     CT Broadly Available                   66.30%
-8     DE Broadly Available                   69.80%
-9     FL        Restricted                   60.30%
-10    GA        Restricted                   64.40%
-11   HI  Broadly Available                   58.50%
-12    ID Broadly Available                   65.20%
-13    IL Broadly Available                   65.90%
-14    IN        Restricted                   60.70%
-15    IA        Restricted                   71.80%
-16    KS            No Law                   70.70%
-17    KY          Required                   67.70%
-18    LA        Restricted                      58%
-19    ME Broadly Available                   67.10%
-20    MD          Required                   71.10%
-21    MA Broadly Available                   68.90%
-22    MI          Required                   72.30%
-23    MN Broadly Available                   75.90%
-24    MS            Banned                   68.90%
-25    MO            Banned                   69.50%
-26    MT            No Law                   69.20%
-27    NE Broadly Available                   67.40%
-28    NV          Required                   66.90%
-29    NH            No Law                   71.90%
-30    NJ          Required                   72.50%
-31    NM          Required                   66.00%
-32    NY Broadly Available                   59.20%
-33    NC        Restricted                   64.60%
-34    ND Broadly Available                   71.20%
-35    OH        Restricted                   67.40%
-36    OK            Banned                   59.70%
-37    OR          Required                   75.30%
-38    PA Broadly Available                   69.70%
-39    RI          Required                   70.00%
-40    SC        Restricted                   62.70%
-41    SD            Banned                   58.90%
-42    TN        Restricted                   64.80%
-43    TX            Banned                   57.90%
-44    UT          Required                   66.90%
-45    VT Broadly Available                   71.70%
-46    VA          Required                   72.90%
-47    WA          Required                   70.00%
-48    WV        Restricted                   59.50%
-49    WI Broadly Available                   72.20%
-50    WY Broadly Available                   63.80%</code></pre>
+<pre><code>Rows: 50
+Columns: 3
+$ State                    &lt;chr&gt; &quot;AL&quot;, &quot;AK&quot;, &quot;AZ&quot;, &quot;AR&quot;, &quot;CA&quot;, &quot;CO&quot;,…
+$ Ballot_Box_Law           &lt;chr&gt; &quot;No Law&quot;, &quot;No Law&quot;, &quot;Broadly Availa…
+$ Voter_Participation_2024 &lt;chr&gt; &quot;58.70%&quot;, &quot;62.10%&quot;, &quot;61.70%&quot;, &quot;52.8…</code></pre>
 </div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

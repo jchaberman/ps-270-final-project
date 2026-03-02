@@ -22,7 +22,7 @@ library(tidyverse)
 
 ```{r}
 data <- read.csv("Final Project Data - Sheet1.csv")
-data
+glimpse(data)
 ```
 
 
