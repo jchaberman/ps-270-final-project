@@ -49,13 +49,14 @@ ballot_summary
 ```
 
 ```{r}
-ballot_summary |>
+Ballot_Plot <- ballot_summary |>
   ggplot(mapping = aes(x = fct_reorder(Ballot_Box_Law, avg_turnout),
                        y = avg_turnout)) +
   geom_bar(stat = "identity") +
   labs(x = "Ballot Box Law",
        y = "Avg Voter Turnout",
        title = "How Ballot Box Laws Effect Voter Turnout")
+Ballot_Plot
 ```
 
 
