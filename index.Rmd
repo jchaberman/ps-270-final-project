@@ -21,9 +21,49 @@ library(tidyverse)
 ```
 
 ```{r}
-data <- read.csv("Final Project Data - Sheet1.csv")
-glimpse(data)
+ballot <- read.csv("Final Project Data - Sheet1.csv")
+glimpse(ballot)
 ```
+
+```{r}
+library(dplyr)
+
+ballot <- ballot |>
+  mutate(
+    Voter_Participation_2024 = as.numeric(gsub("%", "", Voter_Participation_2024))
+  )
+ballot
+```
+
+
+```{r}
+ballot_summary <- ballot |>
+  group_by(Ballot_Box_Law) |>
+  summarize(
+    avg_turnout = mean(Voter_Participation_2024, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+ballot_summary
+
+```
+
+```{r}
+ballot_summary |>
+  ggplot(mapping = aes(x = fct_reorder(Ballot_Box_Law, avg_turnout),
+                       y = avg_turnout)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Ballot Box Law",
+       y = "Avg Voter Turnout",
+       title = "How Ballot Box Laws Effect Voter Turnout")
+```
+
+
+
+
+
+
+
 
 
 
