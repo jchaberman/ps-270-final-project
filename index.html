@@ -1658,6 +1658,46 @@ $ Voter_Participation_2024 &lt;chr&gt; &quot;58.70%&quot;, &quot;62.10%&quot;, &
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" alt="" width="624" /></p>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>ballot_summary_table</span> <span class='op'>&lt;-</span> <span class='va'>ballot_summary</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span><span class='st'>"Ballot Box Availability"</span> <span class='op'>=</span> <span class='va'>Ballot_Box_Law</span>,</span>
+<span>         <span class='st'>"Average Voter Turnout"</span> <span class='op'>=</span> <span class='va'>avg_turnout</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>ballot_summary_table</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Ballot Box Availability</th>
+<th style="text-align: right;">Average Voter Turnout</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Banned</td>
+<td style="text-align: right;">61.28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Broadly Available</td>
+<td style="text-align: right;">67.16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">No Law</td>
+<td style="text-align: right;">66.52</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Required</td>
+<td style="text-align: right;">69.72</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Restricted</td>
+<td style="text-align: right;">63.42</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This data shows a somewhat small, but noticeable effect of ballot box availability on voter turnout. The more supportive a law is regarding ballot boxes, the higher voter turnout is. In states where ballot boxes are banned, voter turnout is about 61.3%, while in states where ballot boxes are required, voter turnout is at 69.7%. The rest of the availability options follow this trend as well, with restricted ballot boxes having the second lowest turnout, no law being in the middle, and broadly available having the second highest turnout.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
