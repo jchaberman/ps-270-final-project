@@ -95,7 +95,7 @@ This graph displays the different rates of voter participation per state. It dis
 
 ## Results
 
-```{r include=FALSE}
+```{r echo=FALSE}
 ballot_summary <- ballot |>
   group_by(Ballot_Box_Law) |>
   summarize(
@@ -107,7 +107,7 @@ ballot_summary
 
 ```
 
-```{r include=FALSE}
+```{r echo=FALSE}
 Ballot_Plot <- ballot_summary |>
   ggplot(mapping = aes(x = fct_reorder(Ballot_Box_Law, avg_turnout),
                        y = avg_turnout)) +
@@ -118,7 +118,7 @@ Ballot_Plot <- ballot_summary |>
 Ballot_Plot
 ```
 
-```{r include=FALSE}
+```{r echo=FALSE}
 ballot_summary_table <- ballot_summary |>
   rename("Ballot Box Availability" = Ballot_Box_Law,
          "Average Voter Turnout" = avg_turnout)
@@ -128,7 +128,7 @@ knitr::kable(ballot_summary_table, digits = 2)
 
 This data shows a somewhat small, but noticeable effect of ballot box availability on voter turnout. The more supportive a law is regarding ballot boxes, the higher voter turnout is. In states where ballot boxes are banned, voter turnout is about 61.3%, while in states where ballot boxes are required, voter turnout is at 69.7%. The rest of the availability options follow this trend as well, with restricted ballot boxes having the second lowest turnout, no law being in the middle, and broadly available having the second highest turnout. 
 
-```{r include=FALSE}
+```{r echo=FALSE}
 fit <- lm(Voter_Participation_2024 ~ Ballot_Box_Law, data = ballot)
 fit
 
@@ -150,7 +150,7 @@ It makes sense that the regression found no statistical significance for no ball
 
 
 
-
+## Code
 
 ```{r print-code, ref.label=knitr::all_labels(), echo = TRUE, eval=FALSE}
 
