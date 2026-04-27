@@ -12,11 +12,14 @@ output:
 ## Introduction
 
   This project explores how voter accessibility can impact voter turnout, focusing specifically on ballot drop boxes. The research question is as follows, **"Does increasing the availability of ballot drop boxes increase voter participation in elections?"** My hypothesis is that **if ballot drop boxes are more available for voters, then there will by higher voter turnout.** The null hypothesis is that the availability of ballot drop boxes does not affect voter turnout. 
+  
+  Ballot drop boxes are important to look at because they are easy for voters to use. Voters can obtain an absentee ballot, commonly through mail, and then drop it in a ballot drop box without ever stepping foot in a polling location. This is all it takes to vote with a ballot drop box. 
+  
   This research is important in determining how to increase voter turnout. Less than two-thirds of eligible Americans voted in 2024, a number that can be greatly increased. Increasing voter turnout allows for American government to become more democratic, as more people are using their voice. If ballot drop boxes cause more people to vote, then they should be used across the country. 
   
 ## Data
   
-  The predictive variable is state laws regarding ballot drop boxes. States can either require ballot drop boxes, allow them but not require them, have no law on drop boxes, restrict the use of ballot drop boxes, or ban their use altogether. These will be the categories in which the variable is organized. The outcome variable is in voter turnout. Voter turnout is measured by state. Voter turnout is the proportion of eligible voter who actually voted in the election. 
+  The predictive variable is state laws regarding ballot drop boxes. States can either require ballot drop boxes, allow them but not require them, have no law on drop boxes, restrict the use of ballot drop boxes, or ban their use altogether. These will be the categories in which the variable is organized. The data for the predictive variable and the categories is from the Movement Advancement Project. The outcome variable is in voter turnout. Voter turnout is measured by state. Voter turnout is the proportion of eligible voter who actually voted in the election. 
   If states that require ballot drop boxes have higher voter turnout, then my hypothesis will be supported. However, if states with more restrictive use on ballot drop boxes have higher voter turnout, or there is no correlation between ballot drop boxes and voter turnout, then my hypothesis will be disproved. Mathematically, the hypothesis will be tested at a 95% confidence interval. Therefore, I will calculate the p-value, and if it is less than 0.05, then the null hypothesis will be rejected. 
 
 
@@ -78,20 +81,22 @@ WV Restricted 59.5
 WI Broadly_Available 72.2
 WY Broadly_Available 63.8
 ", header = TRUE) 
-glimpse(ballot)
 ```
 
 ```{r echo=FALSE}
 ggplot(ballot, aes(x = State,
-                   y = Voter_Participation_2024)) +
+                   y = Voter_Participation_2024,
+                   color = Ballot_Box_Law)) +
   geom_point() +
   labs(title = "Voter Participation by State",
        x = "State",
-       y = "Voter Participation in 2024 (%)"
-  )
+       y = "Voter Participation in 2024 (%)",
+       color = "Ballot Box Availability")+
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7))
 ```
 
-This graph displays the different rates of voter participation per state. It displays how much voter participation can vary, with some states being close to 80% participation and some being close to 50% participation. We are looking to organize this according to ballot drop box availability, to see the impact it may have on voter participation. 
+This graph displays the different rates of voter participation per state, and is color coded by ballot drop box availability. It displays how much voter participation can vary, with some states being close to 80% participation and some being close to 50% participation. We are looking to organize this according to ballot drop box availability, to see the impact it may have on voter participation. 
 
 ## Results
 
@@ -101,9 +106,10 @@ ballot_summary <- ballot |>
   summarize(
     avg_turnout = mean(Voter_Participation_2024, na.rm = TRUE),
     .groups = "drop"
-  )
-
-ballot_summary
+  ) |>
+  mutate(Ballot_Box_Law = recode(Ballot_Box_Law,
+                                 "No_Law" = "No Law",
+                                 "Broadly_Available" = "Broadly Available"))
 
 ```
 
@@ -120,13 +126,14 @@ Ballot_Plot
 
 ```{r echo=FALSE}
 ballot_summary_table <- ballot_summary |>
+  arrange(avg_turnout) |>
   rename("Ballot Box Availability" = Ballot_Box_Law,
          "Average Voter Turnout" = avg_turnout)
 
 knitr::kable(ballot_summary_table, digits = 2)
 ```
 
-This data shows a somewhat small, but noticeable effect of ballot box availability on voter turnout. The more supportive a law is regarding ballot boxes, the higher voter turnout is. In states where ballot boxes are banned, voter turnout is about 61.3%, while in states where ballot boxes are required, voter turnout is at 69.7%. The rest of the availability options follow this trend as well, with restricted ballot boxes having the second lowest turnout, no law being in the middle, and broadly available having the second highest turnout. 
+This data displays the average voter turnout in a state based on their availability of ballot drop boxes. It shows a somewhat small, but noticeable effect of ballot box availability on voter turnout. The more supportive a law is regarding ballot boxes, the higher voter turnout is. In states where ballot boxes are banned, voter turnout is about 61.3%, while in states where ballot boxes are required, voter turnout is at 69.7%. The rest of the availability options follow this trend as well, with restricted ballot boxes having the second lowest turnout, no law being in the middle, and broadly available having the second highest turnout. 
 
 ```{r echo=FALSE}
 fit <- lm(Voter_Participation_2024 ~ Ballot_Box_Law, data = ballot)
@@ -141,9 +148,21 @@ tidy(fit) |>
 
 
 
-The regression analysis works with ballot boxes being banned as the intercept. When ballot boxes are banned, the average voter turnout per state is 61.28%. This result is statistically significant at 95% confidence as the p-value is between 0 and 0.001. The coefficient for ballot boxes being broadly available is 5.87. This means that on average, in states where ballot drop boxes are available, voter turnout is about 5.87 percentage points higher than in states where ballot drop boxes are banned. This result is statistically significant as the p-value is less than 0.05. The coefficient for states with no ballot box law is 5.24. This means on average their voter turnout is 5.23 percentage points higher than states where ballot drop boxes are banned. This is not statistically significant however as the p-value is greater than 0.05. The coefficient for states where ballot drop boxes are required is 8.44. This means that states where ballot drop boxes are required have on average 8.44 percentage point higher turnout than states where ballot drop boxes are banned. This result is statistically significant as the p-value is less than 0.05. Finally, the coefficient for ballot drop boxes being restricted is 2.14. This means that on average, states that restrict ballot drop box use have on average 2.14 percentage point higher voter turnout than states where ballot drop boxes are banned. 
+The regression analysis works with ballot boxes being banned as the intercept. Statistical significance is being tested with an alpha = 0.05.When ballot boxes are banned, the average voter turnout per state is 61.28%. This result is statistically significant as the p-value is less than 0.05. The coefficient for ballot boxes being broadly available is 5.87. This means that on average, in states where ballot drop boxes are available, voter turnout is about 5.87 percentage points higher than in states where ballot drop boxes are banned. This result is statistically significant as the p-value is less than 0.05. Additionally, the evidence to support this relationship is strong as the standard error is much less than the coefficient. The coefficient for states with no ballot box law is 5.24. This means on average their voter turnout is 5.23 percentage points higher than states where ballot drop boxes are banned. This is not statistically significant however as the p-value is greater than 0.05. However, the evidence to support this relationship is strong, with the standard error being significantly less than the coefficient. The coefficient for states where ballot drop boxes are required is 8.44. This means that states where ballot drop boxes are required have on average 8.44 percentage point higher turnout than states where ballot drop boxes are banned. This result is statistically significant as the p-value is less than 0.05. There is also strong evidence that the relationship exists as the standard error is much less than the coefficient. Finally, the coefficient for ballot drop boxes being restricted is 2.14. This means that on average, states that restrict ballot drop box use have on average 2.14 percentage point higher voter turnout than states where ballot drop boxes are banned. The evidence to support this relationship is also uncertain, as the standard error is similar to the coefficient. 
 
-It makes sense that the regression found no statistical significance for no ballot box law and ballot boxes being restricted. When relative to ballot boxes being banned, ballot boxes being restricted is not much different. Neither do much to increase voter accessibility, and the results relative to one another should not be that different. So when it comes to the null hypothesis in this instance, that restricting ballot drop boxes do not make a difference in voter turnout relative to banning ballot drop boxes, it cannot be rejected. Additionally, the null hypothesis for no ballot box law mathematically cannot be rejected, and it should not be. Just because a state does not have a law regarding ballot drop boxes does not mean that they exist in the state. If some of these states do not have drop boxes, then there is no difference between not having a law, and having a law that restricts the drop boxes. Therefore, the null hypothesis, that there is no difference in voter turnout between states that do not have a ballot drop box law and states that ban there use, should not be rejected. 
+It makes sense that the regression found no statistical significance for no ballot box law and ballot boxes being restricted. When relative to ballot boxes being banned, ballot boxes being restricted is not much different. Neither do much to increase voter accessibility, and the results relative to one another should not be that different. So when it comes to the null hypothesis in this instance, that restricting ballot drop boxes do not make a difference in voter turnout relative to banning ballot drop boxes, it cannot be rejected. It also makes sense in this case that the evidence to support the relationship is uncertain based on the standard error, for these same reasons. Additionally, the null hypothesis for no ballot box law mathematically cannot be rejected, and it should not be. Just because a state does not have a law regarding ballot drop boxes does not mean that they exist in the state. If some of these states do not have drop boxes, then there is no difference between not having a law, and having a law that restricts the drop boxes. Therefore, the null hypothesis, that there is no difference in voter turnout between states that do not have a ballot drop box law and states that ban there use, should not be rejected. However, there is strong evidence to support the relationship with low standard error. This makes sense as the mean voter turnout for these states is definitely higher compared to states where ballot drop boxes are banned. 
+
+The relationship overall should be interpreted causally. It cannot be mathematically proved that states with no law regarding ballot drop boxes or restricted ballot drop boxes have significantly higher voter turnout than states where ballot drop boxes are banned. However, it is mathematically strong that states where ballot drop boxes are broadly available or required have a significantly higher voter turnout rate than states where ballot drop boxes are banned. Thus supporting ballot drop boxes causes higher voter turnout, while not supporting them leads to lower voter turnout. 
+
+## Conclusion
+
+### Results and Assessment
+Average voter turnout directly reflected state laws regarding ballot drop box availability. When ballot drop boxes are required, it results in the highest mean voter turnout at 69.72%. This is followed by when drop boxes are broadly available, with mean voter turnout at 67.16%, then no law regarding drop boxes at 66.52%. States where drop boxes are restricted have a mean voter turnout of 63.42%, and finally is states where ballot drop boxes are banned, with mean voter turnout is 61.28%. This shows a clear relationship between ballot drop box availability and voter turnout, supporting my hypothesis. While the regression creates uncertainty regarding states where ballot drop boxes are restricted, or there is no law regarding them, this is relative to states where ballot drop boxes are banned. The regression also shows strong support for the relationship between states where drop boxes are required or broadly available and higher voter turnout. 
+
+### Limitations
+It is important to note some limitations to the findings. First, this data is only from one year, 2024. To truly see the impact of ballot drop boxes, having data from other years as well would be helpful. We could see how a state's voter turnout changes over time relative to ballot drop box availability. Going along with that, there are only 50 data points. This is not a large sample size, and looking at other years or other countries could help increase sample size and thus reliability. States may have also had something affect their turnout in 2024, like weather, that was not present in other years, a possible confounding variable 
+
+There are other possible confounding that need to be acknowledged as well. First, conservatives typically are less likely to support the use of ballot drop boxes. Meanwhile, liberals are more likely to support the use of ballot drop boxes. These associations of politics can be affecting voter turnout rates. Additionally, states that limit the use of ballot drop boxes may have other measures in place that limit voting, like voter id laws or no mail in voting. On the other hand, states that promote the use of ballot drop boxes might do other things to promote voting like early voting or mail in voting.
 
 
 
