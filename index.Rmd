@@ -11,7 +11,7 @@ output:
 
 ## Introduction
 
-  This project explores how voter accessibility can impact voter turnout, focusing specifically on ballot drop boxes. The research question is as follows, "Does increasing the availability of ballot drop boxes increase voter participation in elections?" My hypothesis is that if ballot drop boxes are more available for voters, then there will by higher voter turnout. The null hypothesis is that the availability of ballot drop boxes does not affect voter turnout. 
+  This project explores how voter accessibility can impact voter turnout, focusing specifically on ballot drop boxes. The research question is as follows, **"Does increasing the availability of ballot drop boxes increase voter participation in elections?"** My hypothesis is that **if ballot drop boxes are more available for voters, then there will by higher voter turnout.** The null hypothesis is that the availability of ballot drop boxes does not affect voter turnout. 
   This research is important in determining how to increase voter turnout. Less than two-thirds of eligible Americans voted in 2024, a number that can be greatly increased. Increasing voter turnout allows for American government to become more democratic, as more people are using their voice. If ballot drop boxes cause more people to vote, then they should be used across the country. 
   
 ## Data
@@ -136,7 +136,7 @@ summary(fit)
 
 ```
 
-The regression analysis works with ballot boxes being banned as the intercept. When ballot boxes are banned, the average voter turnout per state is 61.28%. This result is statistically significant at 95% confidence as the p-value is between 0 and 0.001. The coefficient for ballot boxes being broadly available is 5.87. This means that on average, in states where ballot drop boxes are available, voter turnout is about 5.87 percentage points higher than in states where ballot drop boxes are banned. 
+The regression analysis works with ballot boxes being banned as the intercept. When ballot boxes are banned, the average voter turnout per state is 61.28%. This result is statistically significant at 95% confidence as the p-value is between 0 and 0.001. The coefficient for ballot boxes being broadly available is 5.87. This means that on average, in states where ballot drop boxes are available, voter turnout is about 5.87 percentage points higher than in states where ballot drop boxes are banned. This result is statistically significant as the p-value is less than 0.05. The coefficient for states with no ballot box law is 5.24. This means on average their voter turnout is 5.23 percentage points higher than states where ballot drop boxes are banned. This is not statistically significant however as the p-value is greater than 0.05. 
 
 
 
