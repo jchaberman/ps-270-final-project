@@ -20,11 +20,11 @@ output:
   If states that require ballot drop boxes have higher voter turnout, then my hypothesis will be supported. However, if states with more restrictive use on ballot drop boxes have higher voter turnout, or there is no correlation between ballot drop boxes and voter turnout, then my hypothesis will be disproved. Mathematically, the hypothesis will be tested at a 95% confidence interval. Therefore, I will calculate the p-value, and if it is less than 0.05, then the null hypothesis will be rejected. 
 
 
-```{r include=FALSE}
+```{r echo=FALSE}
 library(tidyverse)
 ```
 
-```{r include=FALSE}
+```{r echo=FALSE}
 ballot <- read.table(text = "
 State Ballot_Box_Law Voter_Participation_2024
 AL No_Law 58.7
@@ -81,7 +81,7 @@ WY Broadly_Available 63.8
 glimpse(ballot)
 ```
 
-```{r include=FALSE}
+```{r echo=FALSE}
 ggplot(ballot, aes(x = State,
                    y = Voter_Participation_2024)) +
   geom_point() +
