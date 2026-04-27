@@ -134,9 +134,17 @@ fit
 
 summary(fit)
 
+library(broom)
+tidy(fit)
+
 ```
 
-The regression analysis works with ballot boxes being banned as the intercept. When ballot boxes are banned, the average voter turnout per state is 61.28%. This result is statistically significant at 95% confidence as the p-value is between 0 and 0.001. The coefficient for ballot boxes being broadly available is 5.87. This means that on average, in states where ballot drop boxes are available, voter turnout is about 5.87 percentage points higher than in states where ballot drop boxes are banned. This result is statistically significant as the p-value is less than 0.05. The coefficient for states with no ballot box law is 5.24. This means on average their voter turnout is 5.23 percentage points higher than states where ballot drop boxes are banned. This is not statistically significant however as the p-value is greater than 0.05. 
+
+
+
+The regression analysis works with ballot boxes being banned as the intercept. When ballot boxes are banned, the average voter turnout per state is 61.28%. This result is statistically significant at 95% confidence as the p-value is between 0 and 0.001. The coefficient for ballot boxes being broadly available is 5.87. This means that on average, in states where ballot drop boxes are available, voter turnout is about 5.87 percentage points higher than in states where ballot drop boxes are banned. This result is statistically significant as the p-value is less than 0.05. The coefficient for states with no ballot box law is 5.24. This means on average their voter turnout is 5.23 percentage points higher than states where ballot drop boxes are banned. This is not statistically significant however as the p-value is greater than 0.05. The coefficient for states where ballot drop boxes are required is 8.44. This means that states where ballot drop boxes are required have on average 8.44 percentage point higher turnout than states where ballot drop boxes are banned. This result is statistically significant as the p-value is less than 0.05. Finally, the coefficient for ballot drop boxes being restricted is 2.14. This means that on average, states that restrict ballot drop box use have on average 2.14 percentage point higher voter turnout than states where ballot drop boxes are banned. 
+
+It makes sense that the regression found no statistical significance for no ballot box law and ballot boxes being restricted. When relative to ballot boxes being banned, ballot boxes being restricted is not much different. 
 
 
 
